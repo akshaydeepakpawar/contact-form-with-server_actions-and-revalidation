@@ -6,7 +6,7 @@ const ContactSchema = new mongoose.Schema(
       type: String,
       required: [true, "Name is required"],
       trim: true,
-      maxlength: [100, "Name cannot exceed 100 charachters"],
+      maxlength: [100, "Name cannot exceed 100 characters"],
     },
     email: {
       type: String,
@@ -22,7 +22,13 @@ const ContactSchema = new mongoose.Schema(
       type: String,
       required: [true, "Message is required"],
       trim: true,
-      maxlength: [1000, "Message cannot exceed 1000 char"],
+      maxlength: [1000, "Message cannot exceed 1000 characters"],
+    },
+    message:{
+      type:String,
+      required:[true,"Message is required"],
+      trim:true,
+      maxlength:[1000,"message cannot exceen 100 characters"]
     },
     status: {
       type: String,
