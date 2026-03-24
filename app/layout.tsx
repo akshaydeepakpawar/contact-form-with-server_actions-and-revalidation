@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
+import { Toaster } from "sonner";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -8,9 +9,9 @@ export const metadata: Metadata = {
 };
 
 const poppins = Poppins({
-  subsets: ['latin'],
-  weight: ['400', '600', '700'], // यहाँ पर ज़रूरत के अनुसार वजन चुन सकते हो
-  display: 'swap',
+  subsets: ["latin"],
+  weight: ["400", "600", "700"], // यहाँ पर ज़रूरत के अनुसार वजन चुन सकते हो
+  display: "swap",
 });
 
 export default function RootLayout({
@@ -19,11 +20,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      className={`${poppins.className} h-full antialiased`}
-    >
-      <body className="min-h-full flex flex-col">{children}</body>
+    <html lang="en" className={`${poppins.className} h-full antialiased`}>
+      <body className="min-h-full flex flex-col">
+        {children}
+        <Toaster position="top-center"/>
+      </body>
     </html>
   );
 }

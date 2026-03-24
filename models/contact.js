@@ -30,8 +30,10 @@ const ContactSchema = new mongoose.Schema(
       default: "new",
     },
   },
-  { timeseries: true },
+  { timestamps: true },
 );
 
 const Contact =
-  mongoose.model.Contact || mongoose.model("Contact", ContactSchema);
+  mongoose.models.Contact || mongoose.model("Contact", ContactSchema);
+
+export default Contact;
