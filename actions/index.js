@@ -48,6 +48,8 @@ export async function createContact(formData) {
       };
     }
 
+    revalidateTag("contact-stats");
+
     const contact = await Contact.create({ name, email, subject, message });
 
     return {
