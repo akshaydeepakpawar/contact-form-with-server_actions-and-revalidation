@@ -4,6 +4,7 @@ import { Badge } from "./ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { Mail } from "lucide-react";
 import { Button } from "./ui/button";
+import {updateContact} from "@/actions/index"
 
 const ContactList = async () => {
   const contacts = await getContacts();
@@ -49,15 +50,29 @@ const ContactList = async () => {
                     {new Date(contact.createdAt).toDateString()}
                   </p>
                   <div className="flex gap-2">
-                    {contact.status==="new" && (
-                        <form>
-                            <Button variant={"outline"} size="sm" type="submit">Mark as Read</Button>
-                        </form>
+                    {contact.status === "new" && (
+                      <form
+                        action={async () => {
+                          "use server";
+                          await updateContact(contact._id, "read");
+                        }}
+                      >
+                        <Button variant={"outline"} size="sm" type="submit">
+                          Mark as Read
+                        </Button>
+                      </form>
                     )}
-                    {contact.status==="read" && (
-                        <form>
-                            <Button variant={"outline"} size="sm" type="submit">Mark as Replied</Button>
-                        </form>
+                    {contact.status === "read" && (
+                      <form
+                        action={async () => {
+                          "use server";
+                          await updateContact(contact._id, "replied");
+                        }}
+                      >
+                        <Button variant={"outline"} size="sm" type="submit">
+                          Mark as Replied
+                        </Button>
+                      </form>
                     )}
                   </div>
                 </div>
