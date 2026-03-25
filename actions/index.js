@@ -2,7 +2,7 @@
 
 import dbConnect from "@/lib/db";
 import Contact from "@/models/contact";
-import {revalidateTag, unstable_cache } from "next/cache";
+import { revalidateTag, unstable_cache } from "next/cache";
 
 export async function updateContact(contactId, status) {
   try {
@@ -16,19 +16,19 @@ export async function updateContact(contactId, status) {
   }
 }
 
-export async function getContactStats(){
-  const getCachedStats=unstable_cache(
-    async()=>{
-      await dbConnect()
-      const total=await Contact.countDocuments()
-      const newCount =await Contact.countDocuments({status:"new"})
-      const readCount =await Contact.countDocuments({status:"read"})
-      const repliedCount =await Contact.countDocuments({status:"replied"})
-      return {total,newCount,readCount,repliedCount}
+export async function getContactStats() {
+  const getCachedStats = unstable_cache(
+    async () => {
+      await dbConnect();
+      const total = await Contact.countDocuments();
+      const newCount = await Contact.countDocuments({ status: "new" });
+      const readCount = await Contact.countDocuments({ status: "read" });
+      const repliedCount = await Contact.countDocuments({ status: "replied" });
+      return { total, newCount, readCount, repliedCount };
     },
     ["contact-stats"],
-    {tags:["contact-stats"]}
-  )
+    { tags: ["contact-stats"], revalidate: 10 },
+  );
   return getCachedStats();
 }
 
