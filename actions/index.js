@@ -2,7 +2,7 @@
 
 import dbConnect from "@/lib/db";
 import Contact from "@/models/contact";
-import { revalidatePath, revalidateTag, unstable_cache } from "next/cache";
+import {revalidateTag, unstable_cache } from "next/cache";
 
 export async function updateContact(contactId, status) {
   try {
